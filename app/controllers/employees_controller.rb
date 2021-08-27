@@ -4,6 +4,11 @@ class EmployeesController < ApplicationController
   # GET /employees or /employees.json
   def index
     @employees = Employee.all
+    @employees = @employees.search_by_name(params[:q]) if params[:q].present?
+    
+    if (params[:filter_key] && params[:filter_value]).present?
+      @employees = @employees.filter_by_options(params[:filter_key], params[:filter_value])
+    end  
   end
 
   # GET /employees/1 or /employees/1.json

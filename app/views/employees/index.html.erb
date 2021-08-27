@@ -2,7 +2,16 @@
 
 <h1>Employees</h1>
 
-<table>
+<nav class="navbar navbar-light bg-light">
+  <form class="form-inline" action="/">
+    <input name="q" class="form-control mr-sm-2" type="search" placeholder="Search By Name" aria-label="Search" value="<%= params[:q] %>">
+    <%= select_tag "filter_key", options_for_select([["Age >", "age >"], ["Age <", "age <"], ["Age =", "age ="], ["Salary >", "salary >"], ["Salary <", "salary <"], ["Salary =", "salary ="]], params[:filter_key]), {prompt: 'Select filter', class: "form-control mr-sm-2"} %>
+    <input name="filter_value" class="form-control mr-sm-2" type="search" placeholder="Search filter value" aria-label="Search"  value="<%= params[:filter_value] %>">  
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+</nav>
+
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
@@ -22,9 +31,9 @@
         <td><%= number_to_currency(employee.salary) %></td>
         <td><%= employee.dob %></td>
         <td><%= employee.age %></td>
-        <td><%= link_to 'Show', employee %></td>
-        <td><%= link_to 'Edit', edit_employee_path(employee) %></td>
-        <td><%= link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', employee, class: 'btn btn-info'  %></td>
+        <td><%= link_to 'Edit', edit_employee_path(employee), class: 'btn btn-light' %></td>
+        <td><%= link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'  %></td>
       </tr>
     <% end %>
   </tbody>
@@ -32,4 +41,4 @@
 
 <br>
 
-<%= link_to 'New Employee', new_employee_path %>
+<%= link_to 'New Employee', new_employee_path, class: 'btn btn-success' %>
